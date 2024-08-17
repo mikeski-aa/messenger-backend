@@ -19,14 +19,5 @@ model user {
   email String @unique
   username String @db.VarChar(15)
   hash String @db.VarChar(255)
-  friends user[] @relation("friends")
-  friendsOf user[] @relation("friends")
-   
 }
 
-// model Friend {
-//   id Int @id @default(autoincrement())
-//   userId Int 
-//   user user @relation(fields: [userId], references: [id])
-//   friendId Int
-// }
