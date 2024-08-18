@@ -2,6 +2,12 @@ const LocalStrategy = require("passport-local").Strategy;
 const passport = require("passport");
 const { PrismaClient } = require("@prisma/client");
 
+// need to use custom fields for email
+const customFields = {
+  usernameField: "email",
+  passwordField: "password",
+};
+
 const verifyCallback = (email, password, done) => {
   const prisma = new PrismaClient();
 
@@ -34,3 +40,7 @@ const verifyCallback = (email, password, done) => {
       done(err);
     });
 };
+
+// new strategy requires verify callback
+const strategy = new LocalStrategy(customFields, verifyCallback);
+passport.use(strategy);
