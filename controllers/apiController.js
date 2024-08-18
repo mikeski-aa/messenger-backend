@@ -21,6 +21,7 @@ exports.postRegister = [
     const errors = validationResult(req);
     // check for errors and send a response
     if (!errors.isEmpty()) {
+      console.log(errors.array());
       return res.sendStatus(400).json({ errors: errors.array() });
     }
 
@@ -30,12 +31,13 @@ exports.postRegister = [
       req.body.password
     );
 
-    console.log(response);
+    console.log(response.success);
+    console.log(response.error);
 
     if (response.success) {
       return res.sendStatus(200).json(response);
     } else {
-      return res.sendStatus(400).json(response.error);
+      return res.sendStatus(400).json("TEST");
     }
   }),
 ];

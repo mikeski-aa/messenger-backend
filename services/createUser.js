@@ -22,9 +22,9 @@ async function createUser(email, username, password) {
       },
     });
 
-    console.log(response);
-
-    return response;
+    const test = { ...response, success: true };
+    console.log(test);
+    return test;
   } catch (error) {
     return { error: "Error creating a user" };
   }
