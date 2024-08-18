@@ -1,6 +1,6 @@
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
-const { PrismaClient } = require("@prisma/client");
+const { createUser } = require("../services/createUser");
 
 // POST new user register
 // user registers with email, password, confirmed password and their desired username
@@ -16,11 +16,23 @@ exports.postRegister = [
     }),
   body("username").trim().isLength({ min: 1 }).escape(),
 
-  asyncHandler((req, res, next) => {
+  asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     // check for errors and send a response
     if (!errors.isEmpty()) {
       return res.send(400).json({ errors: errors.array() });
+    }
+
+    const response = await createUser(
+      req.body.email,
+      req.body.username,
+      req.body.password
+    );
+
+    if (response.success) {
+      return res.send(200).json(response);
+    } else {
+      return res.send(400).json(response.error);
     }
   }),
 ];
