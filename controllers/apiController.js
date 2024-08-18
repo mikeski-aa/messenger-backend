@@ -35,9 +35,10 @@ exports.postRegister = [
     console.log(response.error);
 
     if (response.success) {
-      return res.sendStatus(200).json(response);
+      return res.status(200).json({ user: response });
     } else {
-      return res.sendStatus(400).json("TEST");
+      console.log("goinghere");
+      return res.status(400).json({ error: "Error creating a user" });
     }
   }),
 ];
