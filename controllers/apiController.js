@@ -35,7 +35,8 @@ exports.postRegister = [
     console.log(response.error);
 
     if (response.success) {
-      return res.status(200).json({ user: response });
+      return res.status(200).json({ user: { success: true } });
+      // return res.status(200).json({ user: response });
     } else {
       console.log("goinghere");
       return res.status(400).json({ error: "Error creating a user" });
