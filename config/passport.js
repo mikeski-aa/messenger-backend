@@ -1,6 +1,7 @@
 const LocalStrategy = require("passport-local").Strategy;
 const passport = require("passport");
 const { PrismaClient } = require("@prisma/client");
+const validatePassword = require("../lib/passportUtils");
 
 // need to use custom fields for email
 const customFields = {
@@ -44,3 +45,5 @@ const verifyCallback = (email, password, done) => {
 // new strategy requires verify callback
 const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
+
+// TO DO: IMPLEMENT JWT.
