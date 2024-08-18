@@ -9,3 +9,5 @@ router.get("/", (req, res, next) => {
 
 // post register user
 router.post("/user", apiController.postRegister);
+
+module.exports = router;

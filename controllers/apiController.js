@@ -17,10 +17,11 @@ exports.postRegister = [
   body("username").trim().isLength({ min: 1 }).escape(),
 
   asyncHandler(async (req, res, next) => {
+    console.log("controller loaded");
     const errors = validationResult(req);
     // check for errors and send a response
     if (!errors.isEmpty()) {
-      return res.send(400).json({ errors: errors.array() });
+      return res.sendStatus(400).json({ errors: errors.array() });
     }
 
     const response = await createUser(
@@ -29,10 +30,16 @@ exports.postRegister = [
       req.body.password
     );
 
+    console.log(response);
+
     if (response.success) {
-      return res.send(200).json(response);
+      return res.sendStatus(200).json(response);
     } else {
-      return res.send(400).json(response.error);
+      return res.sendStatus(400).json(response.error);
     }
   }),
 ];
+
+// exports.postRegister = asyncHandler(async (req, res, next) => {
+//   res.send("OK");
+// });
