@@ -20,4 +20,13 @@ router.post(
   apiController.postLogin
 );
 
+router.get(
+  "/test",
+  passport.authenticate("jwt", { session: false }),
+  function (req, res, next) {
+    console.log("jwt authenticate worked");
+    res.json({ message: "jwt auth working" });
+  }
+);
+
 module.exports = router;

@@ -31,7 +31,6 @@ const verifyCallback = (email, password, done) => {
       // function checking validity from utils -> compares password hash v.s stored hash
       // true or false
       const isValid = validatePassword(password, user.hash);
-      console.log(user);
       if (isValid) {
         console.log("validation OK");
         return done(null, user);
@@ -50,29 +49,46 @@ const strategy = new LocalStrategy(customFields, verifyCallback);
 passport.use(strategy);
 
 // TO DO: IMPLEMENT JWT.
-const verifyJWTCallback = (jwt_payload, done) => {
-  const prisma = new PrismaClient();
+// const verifyJWTCallback = (jwt_payload, done) => {
+//   const prisma = new PrismaClient();
+//   console.log("verify JWT shit");
+//   console.log(jwt_payload);
+//   prisma.user
+//     .findFirst({
+//       where: {
+//         email: jwt_payload.email,
+//       },
+//     })
+//     .then((user) => {
+//       return done(null, user);
+//     })
+//     .catch((err) => {
+//       return done(err, false, { message: "Token mismatch" });
+//     });
+// };
 
-  prisma.user
-    .findFirst({
-      where: {
-        email: jwt_payload.email,
-      },
-    })
-    .then((user) => {
-      return done(null, user);
-    })
-    .catch((err) => {
-      return done(err, false, { message: "Token mismatch" });
-    });
-};
-
-const JWTstrat = new JwtStrategy(
-  {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: "secret",
-  },
-  verifyJWTCallback
+passport.use(
+  new JwtStrategy(
+    {
+      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      secretOrKey: "secret",
+    },
+    (jwt_payload, done) => {
+      console.log("verify JWT shit");
+      console.log(jwt_payload);
+      const prisma = new PrismaClient();
+      prisma.user
+        .findFirst({
+          where: {
+            email: jwt_payload.email,
+          },
+        })
+        .then((user) => {
+          return done(null, user);
+        })
+        .catch((err) => {
+          return done(err, false, { message: "Token mismatch" });
+        });
+    }
+  )
 );
-
-passport.use(JWTstrat);

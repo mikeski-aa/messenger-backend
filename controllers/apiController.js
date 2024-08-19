@@ -2,6 +2,7 @@ const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 // POST new user register
 // user registers with email, password, confirmed password and their desired username
@@ -47,4 +48,10 @@ exports.postRegister = [
 exports.postLogin = asyncHandler(async (req, res, next) => {
   console.log("working fine");
   console.log(req.user);
+
+  const token = jwt.sign({ email: req.user.email }, "secret", {
+    expiresIn: "12h",
+  });
+
+  return res.json({ token: token });
 });
