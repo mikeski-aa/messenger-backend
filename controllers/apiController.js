@@ -14,7 +14,7 @@ exports.postRegister = [
     .custom((value, { req }) => {
       return value === req.body.password;
     }),
-  body("username").trim().isLength({ min: 1 }).escape(),
+  body("username").trim().isLength({ min: 1, max: 15 }).escape(),
 
   asyncHandler(async (req, res, next) => {
     console.log("controller loaded");
@@ -35,15 +35,23 @@ exports.postRegister = [
     console.log(response.error);
 
     if (response.success) {
-      return res.status(200).json({ user: { success: true } });
+      return res.status(200).json({ response });
       // return res.status(200).json({ user: response });
     } else {
       console.log("goinghere");
-      return res.status(400).json({ error: "Error creating a user" });
+      return res.status(400).json({ message: "Error creating a user" });
     }
   }),
 ];
 
-// exports.postRegister = asyncHandler(async (req, res, next) => {
-//   res.send("OK");
-// });
+exports.postLogin = [
+  body("email").isEmail().trim().isLength({ min: 1 }).escape(),
+  body("password").trim().isLength({ min: 1 }).escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!error.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+  }),
+];

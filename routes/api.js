@@ -8,6 +8,9 @@ router.get("/", (req, res, next) => {
 });
 
 // post register user
-router.post("/user", apiController.postRegister);
+router.post("/register", apiController.postRegister);
+
+// post user login
+// router.post("/login", apiController.postLogin);
 
 module.exports = router;
