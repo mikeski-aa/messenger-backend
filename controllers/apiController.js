@@ -44,18 +44,7 @@ exports.postRegister = [
 // on login:
 // check that password matches hash created
 // create JWT token in local storage
-exports.postLogin = [
-  body("email").isEmail().trim().isLength({ min: 1 }).escape(),
-  body("password").trim().isLength({ min: 1 }).escape(),
-
-  asyncHandler(async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!error.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
-    }
-
-    await passport.authenticate("local", { session: false });
-    console.log(req.body);
-    console.log("test");
-  }),
-];
+exports.postLogin = asyncHandler(async (req, res, next) => {
+  console.log("working fine");
+  console.log(req.user);
+});
