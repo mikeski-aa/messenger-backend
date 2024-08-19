@@ -1,6 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
+const passport = require("passport");
 
 // POST new user register
 // user registers with email, password, confirmed password and their desired username
@@ -17,7 +18,6 @@ exports.postRegister = [
   body("username").trim().isLength({ min: 1, max: 15 }).escape(),
 
   asyncHandler(async (req, res, next) => {
-    console.log("controller loaded");
     const errors = validationResult(req);
     // check for errors and send a response
     if (!errors.isEmpty()) {
@@ -31,9 +31,6 @@ exports.postRegister = [
       req.body.password
     );
 
-    console.log(response.success);
-    console.log(response.error);
-
     if (response.success) {
       return res.status(200).json({ response });
       // return res.status(200).json({ user: response });
@@ -44,6 +41,9 @@ exports.postRegister = [
   }),
 ];
 
+// on login:
+// check that password matches hash created
+// create JWT token in local storage
 exports.postLogin = [
   body("email").isEmail().trim().isLength({ min: 1 }).escape(),
   body("password").trim().isLength({ min: 1 }).escape(),
@@ -53,5 +53,9 @@ exports.postLogin = [
     if (!error.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+
+    await passport.authenticate("local", { session: false });
+    console.log(req.body);
+    console.log("test");
   }),
 ];

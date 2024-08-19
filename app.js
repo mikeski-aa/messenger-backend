@@ -7,6 +7,8 @@ const cors = require("cors");
 
 var indexRouter = require("./routes/index");
 var apiRouter = require("./routes/api");
+const passport = require("passport");
+require("./config/passport");
 
 var app = express();
 
