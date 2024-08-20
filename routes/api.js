@@ -21,12 +21,9 @@ router.post(
 );
 
 router.get(
-  "/test",
+  "/validate",
   passport.authenticate("jwt", { session: false }),
-  function (req, res, next) {
-    console.log("jwt authenticate worked");
-    res.json({ message: "jwt auth working" });
-  }
+  apiController.getValidate
 );
 
 module.exports = router;

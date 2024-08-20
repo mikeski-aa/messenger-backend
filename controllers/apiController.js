@@ -55,3 +55,14 @@ exports.postLogin = asyncHandler(async (req, res, next) => {
 
   return res.json({ token: token });
 });
+
+// get request to check that user token is still valid, return user name and id
+exports.getValidate = asyncHandler(async (req, res, next) => {
+  const user = {
+    username: req.user.username,
+    id: req.user.id,
+  };
+
+  console.log(user);
+  return res.json({ user });
+});
