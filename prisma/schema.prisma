@@ -20,4 +20,3 @@ model user {
   username String @db.VarChar(15)
   hash String @db.VarChar(255)
 }
-
