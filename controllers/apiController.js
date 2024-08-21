@@ -1,4 +1,4 @@
-const { body, validationResult, param } = require("express-validator");
+const { body, validationResult, param, query } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
 const passport = require("passport");
@@ -69,7 +69,7 @@ exports.getValidate = asyncHandler(async (req, res, next) => {
 
 // get users that match specific request username
 exports.getUsers = [
-  param("uname").isLength({ min: 1, max: 15 }).trim().escape(),
+  query("uname").isLength({ min: 1, max: 15 }).trim().escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
 
@@ -77,6 +77,8 @@ exports.getUsers = [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    console.log(req.params);
+    // call service to query DB
+
+    return res.send(req.query.uname);
   }),
 ];

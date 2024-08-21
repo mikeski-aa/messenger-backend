@@ -9,6 +9,10 @@ router.get("/", (req, res, next) => {
   res.send("testing");
 });
 
+router.get("/test/:id", (req, res, next) => {
+  res.send("xd");
+});
+
 // post register user
 router.post("/register", apiController.postRegister);
 
@@ -29,8 +33,8 @@ router.get(
 
 // get list of all users matching the username queried
 router.get(
-  "/users/:uname",
-  passport.authenticate("jwt", { session: false }),
+  "/users",
+  // passport.authenticate("jwt", { session: false }),
   apiController.getUsers
 );
 
