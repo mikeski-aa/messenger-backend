@@ -97,5 +97,7 @@ exports.getFriends = [
 
     // call service to get data from DB
     const response = await getFriends(req.query.id);
+
+    return res.json(response);
   }),
 ];

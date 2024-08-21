@@ -48,7 +48,7 @@ async function showFriend(idA) {
 
 // showFriend(78);
 // showFriend(34);
-// addFriend(78, 34);
+// addFriend(82, 85);
 
 // userAddTest("test@test.com", "TestUser", "ASDg1#$%%Z9sjd");
 // userAddTest("dd@rest.com", "AnotherTest", "ASDg1#$ddd34%%Z9sjd");
