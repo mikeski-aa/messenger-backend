@@ -52,4 +52,4 @@ async function showFriend(idA) {
 
 // userAddTest("test@test.com", "TestUser", "ASDg1#$%%Z9sjd");
 // userAddTest("dd@rest.com", "AnotherTest", "ASDg1#$ddd34%%Z9sjd");
-// userAddTest("d3a@rest.com", "NotMe", "ASDg1#$ddd34%%Z9DD3assjd");
+// userAddTest("d3adddd@rest.com", "MikeMike", "ASDg1#$ddd34%%Z9d34DD3assjd");

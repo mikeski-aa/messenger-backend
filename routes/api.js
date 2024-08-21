@@ -34,8 +34,15 @@ router.get(
 // get list of all users matching the username queried
 router.get(
   "/users",
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   apiController.getUsers
+);
+
+// get list of all friends of the user
+router.get(
+  "/friends",
+  passport.authenticate("jwt", { session: false }),
+  apiController.getFriends
 );
 
 module.exports = router;

@@ -71,7 +71,7 @@ exports.getValidate = asyncHandler(async (req, res, next) => {
 // get users that match specific request username
 exports.getUsers = [
   query("uname").isLength({ min: 1, max: 15 }).trim().escape(),
-  query("id").toInt().trim().escape(),
+  query("id").toInt().trim().escape().isLength({ min: 1 }),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     console.log(req.query.id);
@@ -83,5 +83,19 @@ exports.getUsers = [
     const response = await getUser(req.query.uname, req.query.id);
 
     return res.json(response);
+  }),
+];
+
+// get friends
+exports.getFriends = [
+  query("id").isLength({ min: 1 }).trim().escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    // call service to get data from DB
+    const response = await getFriends(req.query.id);
   }),
 ];
