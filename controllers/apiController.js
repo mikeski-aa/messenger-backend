@@ -1,6 +1,7 @@
 const { body, validationResult, param, query } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
+const { getUser } = require("../services/getUser");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -78,7 +79,8 @@ exports.getUsers = [
     }
 
     // call service to query DB
-
-    return res.send(req.query.uname);
+    const response = await getUser(req.query.uname);
+    console.log(response.length);
+    return res.json(response);
   }),
 ];
