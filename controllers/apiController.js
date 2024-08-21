@@ -71,16 +71,17 @@ exports.getValidate = asyncHandler(async (req, res, next) => {
 // get users that match specific request username
 exports.getUsers = [
   query("uname").isLength({ min: 1, max: 15 }).trim().escape(),
+  query("id").toInt().trim().escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
-
+    console.log(req.query.id);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
 
     // call service to query DB
-    const response = await getUser(req.query.uname);
-    console.log(response.length);
+    const response = await getUser(req.query.uname, req.query.id);
+
     return res.json(response);
   }),
 ];

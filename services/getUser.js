@@ -1,6 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 
-async function getUser(username) {
+async function getUser(username, id) {
   const prisma = new PrismaClient();
 
   try {
@@ -9,6 +9,7 @@ async function getUser(username) {
         username: {
           contains: username,
         },
+        id: { not: +id },
       },
       select: {
         id: true,
@@ -17,6 +18,7 @@ async function getUser(username) {
       },
     });
 
+    console.log(response);
     return response;
   } catch (error) {
     return error;
