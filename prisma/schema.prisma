@@ -19,4 +19,7 @@ model user {
   email String @unique
   username String @db.VarChar(15)
   hash String @db.VarChar(255)
+  friends user[] @relation("friends")
+  friendOf user[] @relation("friends")
 }
+

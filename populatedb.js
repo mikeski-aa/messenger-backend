@@ -18,5 +18,38 @@ async function userAddTest(email, username, hash) {
   }
 }
 
-userAddTest("test@test.com", "testER", "ASDg1#$%%Z9sjd");
+// for remove, you would simply disconnect instead of connect
+async function addFriend(idA, idB) {
+  const prisma = new PrismaClient();
+
+  const response = await prisma.user.update({
+    where: { id: idA },
+    data: { friends: { connect: [{ id: idB }] } },
+  });
+
+  const response2 = await prisma.user.update({
+    where: { id: idB },
+    data: { friends: { connect: [{ id: idA }] } },
+  });
+
+  console.log(response);
+  console.log(response2);
+}
+
+async function showFriend(idA) {
+  const prisma = new PrismaClient();
+
+  const response = await prisma.user.findUnique({
+    where: { id: idA },
+    include: { friends: true },
+  });
+
+  console.log(response);
+}
+
+// showFriend(78);
+// showFriend(34);
+// addFriend(78, 34);
+
+// userAddTest("test@test.com", "testER", "ASDg1#$%%Z9sjd");
 // userAddTest("rest@rest.com", "restER", "ASDg1#$ddd34%%Z9sjd");
