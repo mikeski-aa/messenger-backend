@@ -20,10 +20,18 @@ router.post(
   apiController.postLogin
 );
 
+// validation for protected routes
 router.get(
   "/validate",
   passport.authenticate("jwt", { session: false }),
   apiController.getValidate
+);
+
+// get list of all users matching the username queried
+router.get(
+  "/users/:uname",
+  passport.authenticate("jwt", { session: false }),
+  apiController.getUsers
 );
 
 module.exports = router;

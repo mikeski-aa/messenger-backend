@@ -50,6 +50,6 @@ async function showFriend(idA) {
 // showFriend(34);
 // addFriend(78, 34);
 
-userAddTest("test@test.com", "TestUser", "ASDg1#$%%Z9sjd");
-userAddTest("dd@rest.com", "AnotherTest", "ASDg1#$ddd34%%Z9sjd");
-userAddTest("d3a@rest.com", "NotMe", "ASDg1#$ddd34%%Z9DD3assjd");
+// userAddTest("test@test.com", "TestUser", "ASDg1#$%%Z9sjd");
+// userAddTest("dd@rest.com", "AnotherTest", "ASDg1#$ddd34%%Z9sjd");
+// userAddTest("d3a@rest.com", "NotMe", "ASDg1#$ddd34%%Z9DD3assjd");
