@@ -9,7 +9,6 @@ async function userAddTest(email, username, hash) {
         email: email,
         username: username,
         hash: hash,
-        friendsOf: 2,
       },
     });
     console.log(response);
@@ -51,5 +50,6 @@ async function showFriend(idA) {
 // showFriend(34);
 // addFriend(78, 34);
 
-// userAddTest("test@test.com", "testER", "ASDg1#$%%Z9sjd");
-// userAddTest("rest@rest.com", "restER", "ASDg1#$ddd34%%Z9sjd");
+userAddTest("test@test.com", "TestUser", "ASDg1#$%%Z9sjd");
+userAddTest("dd@rest.com", "AnotherTest", "ASDg1#$ddd34%%Z9sjd");
+userAddTest("d3a@rest.com", "NotMe", "ASDg1#$ddd34%%Z9DD3assjd");
