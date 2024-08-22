@@ -4,11 +4,25 @@ async function updateFriendsList(userA, userB) {
   const prisma = new PrismaClient();
 
   try {
-    const response = await prisma.user.update({
+    const responseOne = await prisma.user.update({
       where: {
-        id: +id,
+        id: +userA,
+      },
+      data: {
+        friends: { connect: [{ id: +userB }] },
       },
     });
+
+    const responseTwo = await prisma.user.update({
+      where: {
+        id: +userB,
+      },
+      data: {
+        friends: { connect: [{ id: +userA }] },
+      },
+    });
+
+    return responseOne, responseTwo;
   } catch (error) {
     console.log(error);
   }

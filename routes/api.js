@@ -60,10 +60,10 @@ router.get(
 );
 
 // update user friends
-router.update(
+router.put(
   "/friends",
   passport.authenticate("jwt", { session: false }),
-  apiController.updateUserInfo
+  apiController.updateFriends
 );
 
 module.exports = router;

@@ -11,6 +11,7 @@ async function getReqOwnerInfo(id) {
       select: {
         username: true,
         status: true,
+        id: true,
       },
     });
 

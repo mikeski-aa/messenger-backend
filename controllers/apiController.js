@@ -8,6 +8,7 @@ const {
   checkRequestDuplicates,
 } = require("../services/postRequestFriend");
 const { getReqOwnerInfo } = require("../services/getReqOwnerInfo");
+const { updateFriendsList } = require("../services/updateFriendsList");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -153,11 +154,17 @@ exports.getRequestOwnerInfo = [
 ];
 
 exports.updateFriends = [
-  query("id").isLength({ min: 1 }).trim().escape(),
+  query("userA").isLength({ min: 1 }).trim().escape(),
+  query("userB").isLength({ min: 1 }).trim().escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
     }
+
+    // call service to update existing user info
+    const response = await updateFriendsList(req.query.userA, req.query.userB);
+
+    return res.json(response);
   }),
 ];
