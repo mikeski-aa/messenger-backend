@@ -16,7 +16,11 @@ async function getUserInfo(id) {
             status: true,
           },
         },
-        requests: true,
+        requests: {
+          where: {
+            targetId: +id,
+          },
+        },
       },
     });
     console.log(response);
