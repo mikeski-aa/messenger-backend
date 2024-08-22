@@ -31,10 +31,10 @@ model reqstatus {
   ownerId Int
   targetId Int
   status reqstat
+  reqdate DateTime @default(now())
 }
 
 enum reqstat {
   pending
-  completed
   
 }

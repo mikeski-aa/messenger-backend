@@ -18,10 +18,10 @@ async function getFriends(id) {
         },
       },
     });
-    return response;
+    return response[0].friends;
   } catch (error) {
     console.log(error);
   }
 }
 
-getFriends(82);
+module.exports = { getFriends };

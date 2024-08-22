@@ -45,4 +45,11 @@ router.get(
   apiController.getFriends
 );
 
+// post a new friend request
+router.post(
+  "/request",
+  passport.authenticate("jwt", { session: false }),
+  apiController.postRequest
+);
+
 module.exports = router;

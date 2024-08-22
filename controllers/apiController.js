@@ -2,6 +2,7 @@ const { body, validationResult, param, query } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
 const { getUser } = require("../services/getUser");
+const { getFriends } = require("../services/getFriends");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -99,5 +100,21 @@ exports.getFriends = [
     const response = await getFriends(req.query.id);
 
     return res.json(response);
+  }),
+];
+
+// post new friend request
+exports.postRequest = [
+  query("target").isLength({ min: 1 }).trim().escape(),
+  query("user").isLength({ min: 1 }).trim().escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    // call service to create a new friend request
+
+    return res.json();
   }),
 ];
