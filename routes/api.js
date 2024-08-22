@@ -73,4 +73,11 @@ router.delete(
   apiController.deleteFriendRequest
 );
 
+// delete friend
+router.delete(
+  "/friends",
+  passport.authenticate("jwt", { session: false }),
+  apiController.deleteFriend
+);
+
 module.exports = router;

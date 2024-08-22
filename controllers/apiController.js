@@ -10,6 +10,7 @@ const {
 const { getReqOwnerInfo } = require("../services/getReqOwnerInfo");
 const { updateFriendsList } = require("../services/updateFriendsList");
 const { deleteRequest } = require("../services/deleteRecord");
+const { disconnectFriend } = require("../services/disconnectFriend");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -185,6 +186,22 @@ exports.deleteFriendRequest = [
 
     // call service to delete existing user request
     const response = await deleteRequest(req.query.reqId);
+    return res.json(response);
+  }),
+];
+
+// delete friend
+exports.deleteFriend = [
+  query("userA").isLength({ min: 1 }).trim().escape(),
+  query("userB").isLength({ min: 1 }).trim().escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    // call service to delete user relationship
+    const response = await disconnectFriend(req.query.userA, req.query.userB);
     return res.json(response);
   }),
 ];
