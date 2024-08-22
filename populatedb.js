@@ -46,6 +46,25 @@ async function showFriend(idA) {
   console.log(response);
 }
 
+async function addTestRequest(target, owner) {
+  const prisma = new PrismaClient();
+
+  try {
+    const response = await prisma.reqstatus.create({
+      data: {
+        ownerId: owner,
+        targetId: target,
+        status: "pending",
+      },
+    });
+    console.log(response);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+addTestRequest(85, 82);
+
 // showFriend(78);
 // showFriend(34);
 // addFriend(82, 85);

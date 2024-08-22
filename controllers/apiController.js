@@ -3,6 +3,10 @@ const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
 const { getUser } = require("../services/getUser");
 const { getFriends } = require("../services/getFriends");
+const {
+  postRequestFriend,
+  checkRequestDuplicates,
+} = require("../services/postRequestFriend");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -112,9 +116,17 @@ exports.postRequest = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
     }
+    // first we need to check if the request has already been created to prevent duplicates
+    const isDuplicate = await checkRequestDuplicates(
+      req.query.target,
+      req.query.user
+    );
 
+    if (isDuplicate) {
+      return res.json({ message: "Request already created!" });
+    }
     // call service to create a new friend request
-
-    return res.json();
+    const response = await postRequestFriend(req.query.target, req.query.user);
+    return res.json(response);
   }),
 ];
