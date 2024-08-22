@@ -21,15 +21,17 @@ model user {
   hash String @db.VarChar(255)
   friends user[] @relation("friends")
   friendOf user[] @relation("friends")
-  requests reqstatus[] 
+  requests reqstatus[] @relation("ownerRequests")
+  targetRequests reqstatus[] @relation("targetRequests")
 
   status String @default("online")
 }
 
 model reqstatus {
   id Int @id @default(autoincrement())
-  owner user @relation(fields: [targetId], references: [id])
+  owner user @relation("ownerRequests", fields: [ownerId], references: [id])
   ownerId Int
+  target user @relation("targetRequests", fields: [targetId], references: [id])
   targetId Int
   status reqstat
   reqdate DateTime @default(now())

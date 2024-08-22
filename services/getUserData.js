@@ -16,14 +16,14 @@ async function getUserInfo(id) {
             status: true,
           },
         },
-        requests: {
+        targetRequests: {
           where: {
             targetId: +id,
           },
         },
       },
     });
-    console.log(response);
+    console.log(response[0].targetRequests);
     return response;
   } catch (error) {
     console.log(error);

@@ -105,7 +105,7 @@ exports.getUserData = [
 
     return res.json({
       friends: response[0].friends,
-      requests: response[0].requests,
+      requests: response[0].targetRequests,
     });
   }),
 ];
