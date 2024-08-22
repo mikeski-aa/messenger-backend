@@ -51,8 +51,6 @@ passport.use(strategy);
 // TO DO: IMPLEMENT JWT.
 const verifyJWTCallback = (jwt_payload, done) => {
   const prisma = new PrismaClient();
-  console.log("verify JWT shit");
-  console.log(jwt_payload);
   prisma.user
     .findFirst({
       where: {
