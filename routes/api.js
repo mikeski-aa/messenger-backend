@@ -52,10 +52,18 @@ router.post(
   apiController.postRequest
 );
 
+// get info about request user
 router.get(
   "/reqowner",
   passport.authenticate("jwt", { session: false }),
   apiController.getRequestOwnerInfo
+);
+
+// update user friends
+router.update(
+  "/friends",
+  passport.authenticate("jwt", { session: false }),
+  apiController.updateUserInfo
 );
 
 module.exports = router;

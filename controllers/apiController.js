@@ -145,8 +145,19 @@ exports.getRequestOwnerInfo = [
       return res.status(400).json({ error: errors.array() });
     }
 
+    // call service to get owner of request info
     const response = await getReqOwnerInfo(req.query.id);
 
     return res.json(response);
+  }),
+];
+
+exports.updateFriends = [
+  query("id").isLength({ min: 1 }).trim().escape(),
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
   }),
 ];
