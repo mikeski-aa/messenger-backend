@@ -52,4 +52,10 @@ router.post(
   apiController.postRequest
 );
 
+router.get(
+  "/reqowner",
+  passport.authenticate("jwt", { session: false }),
+  apiController.getRequestOwnerInfo
+);
+
 module.exports = router;

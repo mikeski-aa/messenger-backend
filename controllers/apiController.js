@@ -7,6 +7,7 @@ const {
   postRequestFriend,
   checkRequestDuplicates,
 } = require("../services/postRequestFriend");
+const { getReqOwnerInfo } = require("../services/getReqOwnerInfo");
 const passport = require("passport");
 const jwt = require("jsonwebtoken");
 
@@ -130,6 +131,22 @@ exports.postRequest = [
     }
     // call service to create a new friend request
     const response = await postRequestFriend(req.query.target, req.query.user);
+    return res.json(response);
+  }),
+];
+
+// get request owner data
+exports.getRequestOwnerInfo = [
+  query("id").isLength({ min: 1 }).trim().escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    const response = await getReqOwnerInfo(req.query.id);
+
     return res.json(response);
   }),
 ];
