@@ -40,9 +40,9 @@ router.get(
 
 // get list of all friends of the user
 router.get(
-  "/friends",
+  "/userdata",
   passport.authenticate("jwt", { session: false }),
-  apiController.getFriends
+  apiController.getUserData
 );
 
 // post a new friend request

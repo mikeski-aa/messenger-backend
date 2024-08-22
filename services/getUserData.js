@@ -1,6 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 
-async function getFriends(id) {
+async function getUserInfo(id) {
   const prisma = new PrismaClient();
 
   try {
@@ -16,12 +16,14 @@ async function getFriends(id) {
             status: true,
           },
         },
+        requests: true,
       },
     });
-    return response[0].friends;
+    console.log(response);
+    return response;
   } catch (error) {
     console.log(error);
   }
 }
 
-module.exports = { getFriends };
+module.exports = { getUserInfo };

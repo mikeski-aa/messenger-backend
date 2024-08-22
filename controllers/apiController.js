@@ -2,7 +2,7 @@ const { body, validationResult, param, query } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
 const { getUser } = require("../services/getUser");
-const { getFriends } = require("../services/getFriends");
+const { getUserInfo } = require("../services/getUserData");
 const {
   postRequestFriend,
   checkRequestDuplicates,
@@ -92,7 +92,7 @@ exports.getUsers = [
 ];
 
 // get friends
-exports.getFriends = [
+exports.getUserData = [
   query("id").isLength({ min: 1 }).trim().escape(),
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
@@ -101,9 +101,12 @@ exports.getFriends = [
     }
 
     // call service to get data from DB
-    const response = await getFriends(req.query.id);
+    const response = await getUserInfo(req.query.id);
 
-    return res.json(response);
+    return res.json({
+      friends: response[0].friends,
+      requests: response[0].requests,
+    });
   }),
 ];
 
