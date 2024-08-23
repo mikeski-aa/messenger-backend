@@ -10,10 +10,11 @@ async function createNewConvo(users) {
       },
     });
 
+    console.log(response);
     return response;
   } catch (error) {
     console.log(error);
   }
 }
-
+// createNewConvo([99, 98]);
 module.exports = { createNewConvo };

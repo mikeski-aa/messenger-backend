@@ -208,9 +208,10 @@ exports.deleteFriend = [
 
 // create a new conversation
 exports.postNewConvo = [
-  body("users").trim().escape(),
+  body("users").trim().escape().toInt(),
 
   asyncHandler(async (req, res, next) => {
+    console.log(req.body);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
