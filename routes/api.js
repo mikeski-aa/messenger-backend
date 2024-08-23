@@ -80,4 +80,17 @@ router.delete(
   apiController.deleteFriend
 );
 
+// post new converastion
+router.post(
+  "/convo",
+  passport.authenticate("jwt", { session: false }),
+  apiController.postNewConvo
+);
+
+// router.post(
+//   "/message",
+//   passport.authenticate("jwt", { session: false }),
+//   apiController.postNewMessage
+// );
+
 module.exports = router;
