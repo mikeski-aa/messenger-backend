@@ -24,6 +24,7 @@ model user {
   requests reqstatus[] @relation("ownerRequests")
   targetRequests reqstatus[] @relation("targetRequests")
 
+
   status String @default("online")
 }
 
@@ -40,4 +41,12 @@ model reqstatus {
 enum reqstat {
   pending
   
+}
+
+model message {
+  id Int @id @default(autoincrement())
+  ownerId Int 
+  targetId Int 
+  message String
+  timestamp DateTime @default(now())
 }
