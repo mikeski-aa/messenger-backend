@@ -13,6 +13,7 @@ const { deleteRequest } = require("../services/deleteRecord");
 const { disconnectFriend } = require("../services/disconnectFriend");
 const { createNewConvo } = require("../services/createNewConvo");
 const { checkConvoExists } = require("../services/checkConvoExists");
+const { checkUserIsIsConvo } = require("../services/checkUserIsInConvo");
 const jwt = require("jsonwebtoken");
 
 // POST new user register
@@ -227,6 +228,27 @@ exports.postNewConvo = [
 
     // call service to create new converstion
     const response = await createNewConvo(req.body.users);
+
+    return res.json(response);
+  }),
+];
+
+// check user is a member of conversation and can view it
+exports.getConvoViewPermission = [
+  query("convoid").trim().escape().toInt(),
+  query("userid").trim().escape().toInt(),
+
+  asyncHandler(async (req, res, next) => {
+    console.log(req.body);
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    const response = await checkUserIsIsConvo(
+      req.query.convoid,
+      req.query.userid
+    );
 
     return res.json(response);
   }),

@@ -87,6 +87,12 @@ router.post(
   apiController.postNewConvo
 );
 
+router.get(
+  "/convopermission",
+  passport.authenticate("jwt", { session: false }),
+  apiController.getConvoViewPermission
+);
+
 // router.post(
 //   "/message",
 //   passport.authenticate("jwt", { session: false }),
