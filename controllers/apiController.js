@@ -12,6 +12,7 @@ const { updateFriendsList } = require("../services/updateFriendsList");
 const { deleteRequest } = require("../services/deleteRecord");
 const { disconnectFriend } = require("../services/disconnectFriend");
 const { createNewConvo } = require("../services/createNewConvo");
+const { checkConvoExists } = require("../services/checkConvoExists");
 const jwt = require("jsonwebtoken");
 
 // POST new user register
@@ -215,6 +216,13 @@ exports.postNewConvo = [
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
+    }
+
+    // call service to check if the message has already been created
+    // if it has been created, retrun that id for user redirect
+    const isDuplicate = await checkConvoExists(req.body.users);
+    if (isDuplicate.found === true) {
+      return res.json({ convo: isDuplicate.response });
     }
 
     // call service to create new converstion

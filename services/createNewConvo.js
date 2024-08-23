@@ -13,8 +13,9 @@ async function createNewConvo(users) {
     console.log(response);
     return response;
   } catch (error) {
-    console.log(error);
+    return { error: error };
   }
 }
-// createNewConvo([99, 98]);
+// createNewConvo([1, 5]);
+// createNewConvo([2, 1]);
 module.exports = { createNewConvo };

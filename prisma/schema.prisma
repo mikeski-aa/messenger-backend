@@ -45,14 +45,14 @@ enum reqstat {
 
 model converastion {
   id Int @id @default(autoincrement())
-  participants Int[]
+  participants Int[] @unique
   message message[]
 }
 
 model message {
   id Int @id @default(autoincrement())
   convo converastion @relation(fields: [convoId], references: [id])
-  convoId Int
+  convoId Int 
   author Int
   message String
   timestamp DateTime @default(now())
