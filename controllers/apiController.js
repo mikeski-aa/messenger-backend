@@ -257,12 +257,16 @@ exports.postMessage = [
       return res.status(400).json({ error: errors.array() });
     }
 
+    console.log("wtf");
+
     const response = await postNewMessage(
       req.body.convoid,
       req.body.authorid,
       req.body.authorname,
       req.body.message
     );
+
+    console.log(response);
 
     return res.json(response);
   }),

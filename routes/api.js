@@ -103,6 +103,7 @@ router.get(
 router.post(
   "/message",
   passport.authenticate("jwt", { session: false }),
+  permission.validateUserInConvo,
   apiController.postMessage
 );
 

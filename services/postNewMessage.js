@@ -6,15 +6,16 @@ async function postNewMessage(convoid, authorid, authorname, message) {
   try {
     const response = await prisma.message.create({
       data: {
-        convoId: convoid,
-        author: authorid,
+        convoId: +convoid,
+        author: +authorid,
         authorname: authorname,
         message: message,
       },
     });
-
+    console.log(response);
     return response;
   } catch (error) {
+    console.log(error);
     return { error: error };
   }
 }
