@@ -257,8 +257,6 @@ exports.postMessage = [
       return res.status(400).json({ error: errors.array() });
     }
 
-    console.log("wtf");
-
     const response = await postNewMessage(
       req.body.convoid,
       req.body.authorid,
@@ -266,8 +264,9 @@ exports.postMessage = [
       req.body.message
     );
 
-    console.log(response);
-
     return res.json(response);
   }),
 ];
+
+// get all private convos
+exports.getDMs = [query(userid).isLength({ min: 1 }).trim().escape().toInt()];
