@@ -9,7 +9,18 @@ async function getMessages(convoid) {
         id: +convoid,
       },
       include: {
-        message: true,
+        message: {
+          select: {
+            timestamp: true,
+            author: true,
+            convoId: true,
+            message: true,
+            authorname: true,
+          },
+          orderBy: {
+            timestamp: "asc",
+          },
+        },
       },
     });
 
