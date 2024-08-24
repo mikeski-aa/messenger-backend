@@ -14,6 +14,7 @@ const { disconnectFriend } = require("../services/disconnectFriend");
 const { createNewConvo } = require("../services/createNewConvo");
 const { checkConvoExists } = require("../services/checkConvoExists");
 const { checkUserIsIsConvo } = require("../services/checkUserIsInConvo");
+const { getMessages } = require("../services/getMessages");
 const jwt = require("jsonwebtoken");
 
 // POST new user register
@@ -238,6 +239,6 @@ exports.getConvo = asyncHandler(async (req, res, next) => {
   // query data checked by middleware already
 
   // call service to get message info:
-
-  return res.json({ text: "xd" });
+  const response = await getMessages(req.query.convoid);
+  return res.json(response);
 });
