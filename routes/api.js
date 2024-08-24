@@ -14,7 +14,11 @@ router.get("/test/:id", (req, res, next) => {
 });
 
 // post register user
-router.post("/register", apiController.postRegister);
+router.post(
+  "/register",
+  validation.registerValidationMiddleware,
+  apiController.postRegister
+);
 
 // post user login
 router.post(

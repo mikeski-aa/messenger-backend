@@ -250,6 +250,8 @@ exports.getConvoViewPermission = [
       req.query.userid
     );
 
+    console.log(response);
+
     return res.json(response);
   }),
 ];
