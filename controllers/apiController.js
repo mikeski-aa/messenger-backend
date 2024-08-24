@@ -15,6 +15,7 @@ const { createNewConvo } = require("../services/createNewConvo");
 const { checkConvoExists } = require("../services/checkConvoExists");
 const { checkUserIsIsConvo } = require("../services/checkUserIsInConvo");
 const { getMessages } = require("../services/getMessages");
+const { postNewMessage } = require("../services/postNewMessage");
 const jwt = require("jsonwebtoken");
 
 // POST new user register
@@ -242,3 +243,27 @@ exports.getConvo = asyncHandler(async (req, res, next) => {
   const response = await getMessages(req.query.convoid);
   return res.json(response);
 });
+
+// post a new message to a convo
+exports.postMessage = [
+  body("convoid").isLength({ min: 1 }).trim().escape().toInt(),
+  body("authorid").isLength({ min: 1 }).trim().escape().toInt(),
+  body("message").isLength({ min: 1, max: 255 }).trim().escape(),
+  body("authorname").isLength({ min: 1, max: 15 }).trim().escape(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    const response = await postNewMessage(
+      req.body.convoid,
+      req.body.authorid,
+      req.body.authorname,
+      req.body.message
+    );
+
+    return res.json(response);
+  }),
+];

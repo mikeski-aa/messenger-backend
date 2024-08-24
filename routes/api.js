@@ -100,10 +100,10 @@ router.get(
   apiController.getConvo
 );
 
-// router.post(
-//   "/message",
-//   passport.authenticate("jwt", { session: false }),
-//   apiController.postNewMessage
-// );
+router.post(
+  "/message",
+  passport.authenticate("jwt", { session: false }),
+  apiController.postMessage
+);
 
 module.exports = router;

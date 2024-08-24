@@ -54,6 +54,7 @@ model message {
   convo converastion @relation(fields: [convoId], references: [id])
   convoId Int 
   author Int
+  authorname String 
   message String
   timestamp DateTime @default(now())
 }
