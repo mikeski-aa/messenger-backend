@@ -233,25 +233,11 @@ exports.postNewConvo = [
   }),
 ];
 
-// check user is a member of conversation and can view it
-exports.getConvoViewPermission = [
-  query("convoid").trim().escape().toInt(),
-  query("userid").trim().escape().toInt(),
+// get conversation content:
+exports.getConvo = asyncHandler(async (req, res, next) => {
+  // query data checked by middleware already
 
-  asyncHandler(async (req, res, next) => {
-    console.log(req.body);
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ error: errors.array() });
-    }
+  // call service to get message info:
 
-    const response = await checkUserIsIsConvo(
-      req.query.convoid,
-      req.query.userid
-    );
-
-    console.log(response);
-
-    return res.json(response);
-  }),
-];
+  return res.json({ text: "xd" });
+});

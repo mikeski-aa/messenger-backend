@@ -12,20 +12,20 @@ async function checkUserIsIsConvo(convoId, userId) {
         },
       },
     });
-    console.log(response);
+    console.log(response + "xd");
 
     if (response.length > 0) {
+      console.log(true);
       return true;
     } else {
+      console.log(false);
       return false;
     }
-
-    return response;
   } catch (error) {
     return { error: error };
   }
 }
 
-// checkUserIsIsConvo(23, 5);
+// checkUserIsIsConvo(25, 1);
 
 module.exports = { checkUserIsIsConvo };

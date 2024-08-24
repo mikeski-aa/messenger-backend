@@ -2,7 +2,8 @@ const express = require("express");
 const router = express.Router();
 const apiController = require("../controllers/apiController");
 const passport = require("passport");
-const validation = require("../middleware/loginValidation");
+const validation = require("../middleware/loginRegisterMW");
+const permission = require("../middleware/convoPermissionMW");
 
 // testing route
 router.get("/", (req, res, next) => {
@@ -91,10 +92,12 @@ router.post(
   apiController.postNewConvo
 );
 
+// get conversation
 router.get(
-  "/convopermission",
+  "/convo",
   passport.authenticate("jwt", { session: false }),
-  apiController.getConvoViewPermission
+  permission.validateUserInConvo,
+  apiController.getConvo
 );
 
 // router.post(
