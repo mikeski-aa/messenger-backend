@@ -39,7 +39,7 @@ function getUniqueParticipants(userId, response) {
 }
 
 async function getUsernameStatus(userId) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.user.findMany({
@@ -60,7 +60,7 @@ async function getUsernameStatus(userId) {
 }
 
 async function getAllPrivateConvos(userId) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.converastion.findMany({

@@ -2,6 +2,7 @@ const LocalStrategy = require("passport-local").Strategy;
 const passport = require("passport");
 const { PrismaClient } = require("@prisma/client");
 const { validatePassword } = require("../lib/passportUtils");
+const { prisma } = require("../config/db");
 
 const JwtStrategy = require("passport-jwt").Strategy;
 const ExtractJwt = require("passport-jwt").ExtractJwt;
@@ -13,7 +14,7 @@ const customFields = {
 };
 
 const verifyCallback = (email, password, done) => {
-  const prisma = new PrismaClient();
+  // const prisma = new PrismaClient();
   console.log(email, password);
   prisma.user
     .findFirst({
@@ -50,7 +51,7 @@ passport.use(strategy);
 
 // TO DO: IMPLEMENT JWT.
 const verifyJWTCallback = (jwt_payload, done) => {
-  const prisma = new PrismaClient();
+  // const prisma = new PrismaClient();
   prisma.user
     .findFirst({
       where: {

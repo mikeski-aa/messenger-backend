@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 
 async function createNewConvo(users) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.converastion.create({

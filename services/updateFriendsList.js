@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 
 async function updateFriendsList(userA, userB) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const responseOne = await prisma.user.update({

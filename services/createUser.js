@@ -3,7 +3,7 @@ const { genPassword } = require("../lib/passportUtils");
 const { checkEmailExists } = require("../services/checkEmailExists");
 
 async function createUser(email, username, password) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   // check for existing user
   const checkEmail = await checkEmailExists(email);

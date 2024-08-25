@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 
 async function deleteRequest(reqid) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.reqstatus.delete({

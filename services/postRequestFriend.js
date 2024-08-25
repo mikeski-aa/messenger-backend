@@ -1,7 +1,7 @@
 const { PrismaClient } = require("@prisma/client");
 
 async function checkRequestDuplicates(target, owner) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.reqstatus.findMany({
@@ -24,7 +24,7 @@ async function checkRequestDuplicates(target, owner) {
 }
 
 async function postRequestFriend(target, owner) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.reqstatus.create({

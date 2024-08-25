@@ -1,7 +1,8 @@
 const { PrismaClient } = require("@prisma/client");
+const { prisma } = require("../config/db");
 
 async function checkConvoExists(users) {
-  const prisma = new PrismaClient();
+  const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.converastion.findMany({
