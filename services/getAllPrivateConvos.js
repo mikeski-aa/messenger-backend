@@ -1,5 +1,25 @@
 const { PrismaClient } = require("@prisma/client");
 
+async function goThroughArray(array) {
+  console.log(array[0].convoId);
+  const tempArray = [];
+  for (let x = 0; x < array.length; x++) {
+    const user = await getUsernameStatus(array[x].userId);
+    const newObj = {
+      username: user.username,
+      status: user.status,
+      userId: array[x].userId,
+      convoId: array[x].convoId,
+    };
+
+    console.log(newObj);
+
+    tempArray.push(newObj);
+  }
+
+  return tempArray;
+}
+
 function subofArray(total, num) {
   return total - num;
 }
@@ -11,17 +31,22 @@ function getUniqueParticipants(userId, response) {
     const result = response[x].participants
       .filter((x) => x != userId)
       .reduce(subofArray);
-    tempArray.push(result);
+    const tempObj = {
+      userId: result,
+      convoId: response[x].id,
+    };
+    tempArray.push(tempObj);
   }
 
   console.log(tempArray);
+  return tempArray;
 }
 
 async function getUsernameStatus(userId) {
   const prisma = new PrismaClient();
 
   try {
-    const response = await prisma.user.findUnique({
+    const response = await prisma.user.findMany({
       where: {
         id: +userId,
       },
@@ -58,9 +83,14 @@ async function getAllPrivateConvos(userId) {
 // getAllPrivateConvos(1);
 // getUsernameStatus(1);
 
-getUniqueParticipants(1, [
-  { id: 23, participants: [2, 1] },
-  { id: 25, participants: [5, 1] },
+// getUniqueParticipants(1, [
+//   { id: 23, participants: [2, 1] },
+//   { id: 25, participants: [5, 1] },
+// ]);
+
+goThroughArray([
+  { userId: 2, convoId: 23 },
+  { userId: 5, convoId: 25 },
 ]);
 
 module.exports = {
