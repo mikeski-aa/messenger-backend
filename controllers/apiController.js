@@ -20,6 +20,7 @@ const {
   getAllPrivateConvos,
   getUsernameStatus,
   getUniqueParticipants,
+  goThroughArray,
 } = require("../services/getAllPrivateConvos");
 const jwt = require("jsonwebtoken");
 
@@ -284,7 +285,9 @@ exports.getDMs = [
     }
 
     const convoIdUserId = await getAllPrivateConvos(req.query.userid);
+    const userArray = getUniqueParticipants(req.query.userid, convoIdUserId);
+    const usableArray = goThroughArray(userArray);
 
-    console.log(response);
+    return res.json(usableArray);
   }),
 ];

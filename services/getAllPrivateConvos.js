@@ -1,22 +1,19 @@
 const { PrismaClient } = require("@prisma/client");
 
 async function goThroughArray(array) {
-  console.log(array[0].convoId);
   const tempArray = [];
   for (let x = 0; x < array.length; x++) {
     const user = await getUsernameStatus(array[x].userId);
     const newObj = {
-      username: user.username,
-      status: user.status,
-      userId: array[x].userId,
-      convoId: array[x].convoId,
+      username: user[0].username,
+      status: user[0].status,
+      user: array[x].userId,
+      convo: array[x].convoId,
     };
-
-    console.log(newObj);
 
     tempArray.push(newObj);
   }
-
+  console.log(tempArray);
   return tempArray;
 }
 
@@ -38,7 +35,6 @@ function getUniqueParticipants(userId, response) {
     tempArray.push(tempObj);
   }
 
-  console.log(tempArray);
   return tempArray;
 }
 
@@ -88,13 +84,14 @@ async function getAllPrivateConvos(userId) {
 //   { id: 25, participants: [5, 1] },
 // ]);
 
-goThroughArray([
-  { userId: 2, convoId: 23 },
-  { userId: 5, convoId: 25 },
-]);
+// goThroughArray([
+//   { userId: 2, convoId: 23 },
+//   { userId: 5, convoId: 25 },
+// ]);
 
 module.exports = {
   getAllPrivateConvos,
   getUsernameStatus,
   getUniqueParticipants,
+  goThroughArray,
 };
