@@ -16,6 +16,11 @@ const { checkConvoExists } = require("../services/checkConvoExists");
 const { checkUserIsIsConvo } = require("../services/checkUserIsInConvo");
 const { getMessages } = require("../services/getMessages");
 const { postNewMessage } = require("../services/postNewMessage");
+const {
+  getAllPrivateConvos,
+  getUsernameStatus,
+  getUniqueParticipants,
+} = require("../services/getAllPrivateConvos");
 const jwt = require("jsonwebtoken");
 
 // POST new user register
@@ -269,4 +274,17 @@ exports.postMessage = [
 ];
 
 // get all private convos
-exports.getDMs = [query(userid).isLength({ min: 1 }).trim().escape().toInt()];
+exports.getDMs = [
+  query("userid").isLength({ min: 1 }).trim().escape().toInt(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    const convoIdUserId = await getAllPrivateConvos(req.query.userid);
+
+    console.log(response);
+  }),
+];

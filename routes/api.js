@@ -100,6 +100,7 @@ router.get(
   apiController.getConvo
 );
 
+// post a new message
 router.post(
   "/message",
   passport.authenticate("jwt", { session: false }),

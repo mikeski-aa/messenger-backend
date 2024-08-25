@@ -23,6 +23,7 @@ model user {
   friendOf user[] @relation("friends")
   requests reqstatus[] @relation("ownerRequests")
   targetRequests reqstatus[] @relation("targetRequests")
+  
 
 
   status String @default("online")
