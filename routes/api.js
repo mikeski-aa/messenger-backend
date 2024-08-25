@@ -108,4 +108,12 @@ router.post(
   apiController.postMessage
 );
 
+// get DMs
+router.get(
+  "/userdms",
+  passport.authenticate("jwt", { session: false }),
+
+  apiController.getDMs
+);
+
 module.exports = router;

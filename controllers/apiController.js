@@ -284,9 +284,13 @@ exports.getDMs = [
       return res.status(400).json({ error: errors.array() });
     }
 
+    console.log("test");
     const convoIdUserId = await getAllPrivateConvos(req.query.userid);
-    const userArray = getUniqueParticipants(req.query.userid, convoIdUserId);
-    const usableArray = goThroughArray(userArray);
+    const userArray = await getUniqueParticipants(
+      req.query.userid,
+      convoIdUserId
+    );
+    const usableArray = await goThroughArray(userArray);
 
     return res.json(usableArray);
   }),
