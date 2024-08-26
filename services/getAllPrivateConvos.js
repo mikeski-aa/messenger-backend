@@ -1,5 +1,20 @@
 const { PrismaClient } = require("@prisma/client");
 
+function twoParticipants(array) {
+  console.log(array);
+  const temp = array.filter((item) => item.participants.length == 2);
+
+  console.log(temp);
+  return temp;
+}
+
+twoParticipants([
+  { id: 4, participants: [1, 2] },
+  { id: 7, participants: [1, 3] },
+  { id: 56, participants: [1, 3, 5, 6] },
+  { id: 12, participants: [1, 3, 2] },
+]);
+
 async function goThroughArray(array) {
   const tempArray = [];
   for (let x = 0; x < array.length; x++) {
@@ -70,7 +85,10 @@ async function getAllPrivateConvos(userId) {
         },
       },
     });
-    return response;
+    console.log(response);
+
+    const filteredResponse = twoParticipants(response);
+    return filteredResponse;
   } catch (error) {
     return { error: error };
   }
