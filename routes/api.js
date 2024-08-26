@@ -112,8 +112,14 @@ router.post(
 router.get(
   "/userdms",
   passport.authenticate("jwt", { session: false }),
-
   apiController.getDMs
 );
+
+// delete convo
+// router.delete(
+//   "/convo/:id",
+//   passport.authenticate("jwt", { session: false }),
+//   apiController.deleteConvo
+// );
 
 module.exports = router;
