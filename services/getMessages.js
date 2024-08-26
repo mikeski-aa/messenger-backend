@@ -4,7 +4,7 @@ async function getMessages(convoid) {
   const { prisma } = require("../config/db");
 
   try {
-    const response = await prisma.converastion.findUnique({
+    const response = await prisma.conversation.findUnique({
       where: {
         id: +convoid,
       },

@@ -5,6 +5,7 @@ exports.validateUserInConvo = [
   query("convoid").trim().escape().toInt(),
   query("userid").trim().escape().toInt(),
   async (req, res, next) => {
+    console.log("CHECKING IF IM HERE");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });

@@ -309,8 +309,10 @@ exports.deleteConvo = [
     }
 
     // call service to delete the convo
-    const reponse = await deleteConvo(req.params.id);
+    console.log(req.params.id);
+    const response = await deleteConvo(req.params.id);
 
+    console.log(response);
     return res.json(response);
   }),
 ];

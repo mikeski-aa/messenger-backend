@@ -16,6 +16,7 @@ const customFields = {
 const verifyCallback = (email, password, done) => {
   // const prisma = new PrismaClient();
   console.log(email, password);
+
   prisma.user
     .findFirst({
       where: {

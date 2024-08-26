@@ -4,7 +4,7 @@ async function createNewConvo(users) {
   const { prisma } = require("../config/db");
 
   try {
-    const response = await prisma.converastion.create({
+    const response = await prisma.conversation.create({
       data: {
         participants: users,
       },

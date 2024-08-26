@@ -5,7 +5,7 @@ async function checkConvoExists(users) {
   const { prisma } = require("../config/db");
 
   try {
-    const response = await prisma.converastion.findMany({
+    const response = await prisma.conversation.findMany({
       where: {
         participants: {
           hasEvery: users,

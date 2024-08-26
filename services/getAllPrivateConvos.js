@@ -63,7 +63,7 @@ async function getAllPrivateConvos(userId) {
   const { prisma } = require("../config/db");
 
   try {
-    const response = await prisma.converastion.findMany({
+    const response = await prisma.conversation.findMany({
       where: {
         participants: {
           has: +userId,

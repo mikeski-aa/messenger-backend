@@ -85,7 +85,7 @@ router.delete(
   apiController.deleteFriend
 );
 
-// post new converastion
+// post new conversation
 router.post(
   "/convo",
   passport.authenticate("jwt", { session: false }),
@@ -119,6 +119,7 @@ router.get(
 router.delete(
   "/convo/:id",
   passport.authenticate("jwt", { session: false }),
+  permission.validateUserInConvo,
   apiController.deleteConvo
 );
 

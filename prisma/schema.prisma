@@ -44,7 +44,7 @@ enum reqstat {
   
 }
 
-model converastion {
+model conversation {
   id Int @id @default(autoincrement())
   participants Int[] @unique
   message message[]
@@ -52,7 +52,7 @@ model converastion {
 
 model message {
   id Int @id @default(autoincrement())
-  convo converastion @relation(fields: [convoId], references: [id])
+  convo conversation @relation(fields: [convoId], references: [id])
   convoId Int 
   author Int
   authorname String 
