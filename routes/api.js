@@ -116,10 +116,10 @@ router.get(
 );
 
 // delete convo
-// router.delete(
-//   "/convo/:id",
-//   passport.authenticate("jwt", { session: false }),
-//   apiController.deleteConvo
-// );
+router.delete(
+  "/convo/:id",
+  passport.authenticate("jwt", { session: false }),
+  apiController.deleteConvo
+);
 
 module.exports = router;

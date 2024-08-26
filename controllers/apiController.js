@@ -22,7 +22,9 @@ const {
   getUniqueParticipants,
   goThroughArray,
 } = require("../services/getAllPrivateConvos");
+const { deleteConvo } = require("../services/deleteConvo");
 const jwt = require("jsonwebtoken");
+const { json, response } = require("express");
 
 // POST new user register
 // user registers with email, password, confirmed password and their desired username
@@ -305,5 +307,10 @@ exports.deleteConvo = [
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
     }
+
+    // call service to delete the convo
+    const reponse = await deleteConvo(req.params.id);
+
+    return res.json(response);
   }),
 ];
