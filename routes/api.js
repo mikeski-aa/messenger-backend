@@ -123,4 +123,11 @@ router.delete(
   apiController.deleteConvo
 );
 
+// post new group chat
+router.post(
+  "/group",
+  passport.authenticate("jwt", { session: false }),
+  apiController.postGroupChat
+);
+
 module.exports = router;

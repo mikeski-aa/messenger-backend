@@ -1,11 +1,11 @@
-async function createNewGroupConvo(users, groupName) {
+async function createNewGroupConvo(users, group) {
   const { prisma } = require("../config/db");
 
   try {
     const response = await prisma.conversation.create({
       data: {
         participants: users,
-        name: groupName,
+        groupname: group,
       },
     });
 
