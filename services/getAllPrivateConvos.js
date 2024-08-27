@@ -8,12 +8,12 @@ function twoParticipants(array) {
   return temp;
 }
 
-twoParticipants([
-  { id: 4, participants: [1, 2] },
-  { id: 7, participants: [1, 3] },
-  { id: 56, participants: [1, 3, 5, 6] },
-  { id: 12, participants: [1, 3, 2] },
-]);
+// twoParticipants([
+//   { id: 4, participants: [1, 2] },
+//   { id: 7, participants: [1, 3] },
+//   { id: 56, participants: [1, 3, 5, 6] },
+//   { id: 12, participants: [1, 3, 2] },
+// ]);
 
 async function goThroughArray(array) {
   const tempArray = [];
