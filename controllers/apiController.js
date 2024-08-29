@@ -329,7 +329,13 @@ exports.postGroupChat = [
       return res.status(400).json({ error: errors.array() });
     }
 
-    const response = await createNewConvo(req.body.users, req.body.name);
+    const isDuplicate = await checkConvoExists(req.body.users);
+
+    if (isDuplicate.found === true) {
+      return res.json({ convo: isDuplicate.response });
+    }
+
+    const response = await createNewGroupConvo(req.body.users, req.body.name);
 
     return res.json(response);
   }),

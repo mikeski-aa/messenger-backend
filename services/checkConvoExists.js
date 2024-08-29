@@ -13,6 +13,8 @@ async function checkConvoExists(users) {
       },
     });
 
+    console.log(response);
+
     if (response.length === 0) {
       return { found: false, response };
     } else {
@@ -24,6 +26,6 @@ async function checkConvoExists(users) {
   }
 }
 
-checkConvoExists([1, 2]);
+checkConvoExists([1, 2, 3]);
 
 module.exports = { checkConvoExists };
