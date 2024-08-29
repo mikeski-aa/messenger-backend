@@ -25,7 +25,7 @@ const {
 const { deleteConvo } = require("../services/deleteConvo");
 const jwt = require("jsonwebtoken");
 const { createNewGroupConvo } = require("../services/createNewGroupConvo");
-const { getGroups } = require("../services/getGroups");
+const { getGroups, getGroupNames } = require("../services/getGroups");
 const { json, response } = require("express");
 
 // POST new user register
@@ -355,7 +355,8 @@ exports.getAllUserGroups = [
 
     // call service to get all group chats that are 3+ in length and where user is memeber
     const groups = await getGroups(req.query.userid);
+    const groupsWithNames = await getGroupNames(groups);
 
-    return res.json(groups);
+    return res.json(groupsWithNames);
   }),
 ];
