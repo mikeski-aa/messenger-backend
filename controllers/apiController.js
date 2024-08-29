@@ -25,6 +25,7 @@ const {
 const { deleteConvo } = require("../services/deleteConvo");
 const jwt = require("jsonwebtoken");
 const { createNewGroupConvo } = require("../services/createNewGroupConvo");
+const { getGroups } = require("../services/getGroups");
 const { json, response } = require("express");
 
 // POST new user register
@@ -287,7 +288,6 @@ exports.getDMs = [
       return res.status(400).json({ error: errors.array() });
     }
 
-    console.log("test");
     const convoIdUserId = await getAllPrivateConvos(req.query.userid);
     const userArray = await getUniqueParticipants(
       req.query.userid,
@@ -332,11 +332,30 @@ exports.postGroupChat = [
     const isDuplicate = await checkConvoExists(req.body.users);
 
     if (isDuplicate.found === true) {
-      return res.json({ convo: isDuplicate.response });
+      return res.json({
+        error: "Group already exists!",
+        group: isDuplicate.response,
+      });
     }
 
     const response = await createNewGroupConvo(req.body.users, req.body.name);
 
     return res.json(response);
+  }),
+];
+
+exports.getAllUserGroups = [
+  query("userid").trim().escape().isLength({ min: 1 }).toInt(),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    // call service to get all group chats that are 3+ in length and where user is memeber
+    const groups = await getGroups(req.query.userid);
+
+    return res.json(groups);
   }),
 ];

@@ -26,6 +26,6 @@ async function checkConvoExists(users) {
   }
 }
 
-checkConvoExists([1, 2, 3]);
+// checkConvoExists([1, 2, 3]);
 
 module.exports = { checkConvoExists };

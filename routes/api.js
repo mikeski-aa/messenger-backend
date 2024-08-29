@@ -130,4 +130,12 @@ router.post(
   apiController.postGroupChat
 );
 
+// get group convos (group convo is 3+ members!)
+router.get(
+  "/group",
+  passport.authenticate("jwt", { session: false }),
+  permission.validateUserInConvo,
+  apiController.getAllUserGroups
+);
+
 module.exports = router;

@@ -46,7 +46,7 @@ enum reqstat {
 
 model conversation {
   id Int @id @default(autoincrement())
-  groupname String? 
+  groupname String? @default("DM")
   participants Int[] @unique
   message message[]
 }
