@@ -138,4 +138,11 @@ router.get(
   apiController.getAllUserGroups
 );
 
+router.delete(
+  "/group",
+  passport.authenticate("jwt", { session: false }),
+  permission.validateUserInConvo,
+  apiController.deleteGroup
+);
+
 module.exports = router;

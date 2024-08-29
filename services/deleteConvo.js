@@ -36,4 +36,4 @@ async function deleteConvo(id) {
 }
 
 // deleteConvo(26);
-module.exports = { deleteConvo };
+module.exports = { deleteConvo, deleteMsgs };

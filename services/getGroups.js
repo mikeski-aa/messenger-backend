@@ -1,3 +1,7 @@
+// I hate this code.
+// Unnescessary DB calls being executed because of poor DB structure.
+// Groups should be linked directly with users, that way I wouldn't need to hit the DB multiple times just to get the names...
+
 function getLongerGroups(response) {
   const tempArray = [];
 
@@ -30,8 +34,6 @@ async function getUsername(userId) {
 }
 
 async function getGroupNames(response) {
-  const { prisma } = require("../config/db");
-
   // double loop is bad. O(n^2).
   for (let x = 0; x < response.length; x++) {
     const unameArray = [];
