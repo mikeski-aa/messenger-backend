@@ -106,6 +106,6 @@ async function addMessage(convoid, authorid, message, authorname) {
 // showFriend(34);
 // addFriend(82, 85);
 
-// userAddTest("test@test.com", "TestUser", "ASDg1#$%%Z9sjd");
-// userAddTest("dd@rest.com", "AnotherTest", "ASDg1#$ddd34%%Z9sjd");
-// userAddTest("d3adddd@rest.com", "MikeMike", "ASDg1#$ddd34%%Z9d34DD3assjd");
+// userAddTest("test@test.com", "ONETEST", "ASDg1#$%%Z9sjd");
+// userAddTest("dd@rest.com", "TWOTEST", "ASDg1#$ddd34%%Z9sjd");
+// userAddTest("d3adddd@rest.com", "THREETEST", "ASDg1#$ddd34%%Z9d34DD3assjd");

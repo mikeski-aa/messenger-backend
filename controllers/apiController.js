@@ -361,23 +361,3 @@ exports.getAllUserGroups = [
     return res.json(groupsWithNames);
   }),
 ];
-
-// delete a group
-
-exports.deleteGroup = [
-  query("userid").trim().escape().isLength({ min: 1 }).toInt(),
-  query("groupid").trim().escape().isLength({ min: 1 }).toInt(),
-
-  asyncHandler(async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ error: errors.array() });
-    }
-
-    // call service to get all group chats that are 3+ in length and where user is memeber
-    const groups = await getGroups(req.query.userid);
-    const groupsWithNames = await getGroupNames(groups);
-
-    return res.json(groupsWithNames);
-  }),
-];
