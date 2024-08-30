@@ -12,10 +12,10 @@ async function updateUserName(id, name) {
 
     console.log(response);
 
-    return response;
+    return { response, success: true };
   } catch (error) {
     console.log(error);
-    return { error: error };
+    return { success: false };
   }
 }
 

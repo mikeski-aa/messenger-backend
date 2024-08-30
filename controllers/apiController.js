@@ -384,16 +384,19 @@ exports.putUserStatus = [
 
 // update username
 exports.putUserName = [
-  query("name").trim().escape().isLength({ min: 1, max: 15 }),
+  query("name").trim().isLength({ min: 1, max: 15 }).escape(),
 
   asyncHandler(async (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      console.log("error found!");
+      console.log(errors);
       return res.status(400).json({ error: errors.array() });
     }
 
     // call service to update user status
     const response = await updateUserName(+req.user.id, req.query.name);
+    console.log(response);
     if (response.success) {
       return res.status(200).json({ response });
       // return res.status(200).json({ user: response });

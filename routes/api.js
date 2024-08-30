@@ -147,7 +147,7 @@ router.put(
 
 // route for updating user name
 router.put(
-  "/userstatus",
+  "/username",
   passport.authenticate("jwt", { session: false }),
   apiController.putUserName
 );
