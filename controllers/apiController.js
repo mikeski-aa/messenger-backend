@@ -2,7 +2,7 @@ const { body, validationResult, param, query } = require("express-validator");
 const asyncHandler = require("express-async-handler");
 const { createUser } = require("../services/createUser");
 const { getUser } = require("../services/getUser");
-const { getUserInfo } = require("../services/getUserData");
+const { getUserInfo } = require("../services/getUserInfo");
 const {
   postRequestFriend,
   checkRequestDuplicates,
@@ -27,6 +27,7 @@ const jwt = require("jsonwebtoken");
 const { createNewGroupConvo } = require("../services/createNewGroupConvo");
 const { getGroups, getGroupNames } = require("../services/getGroups");
 const { updateUserStatus } = require("../services/updateUserStatus");
+const { updateUserName } = require("../services/updateUserName");
 const { json, response } = require("express");
 
 // POST new user register
@@ -61,7 +62,6 @@ exports.postRegister = [
       return res.status(200).json({ response });
       // return res.status(200).json({ user: response });
     } else {
-      console.log("goinghere");
       return res.status(400).json({ message: "Error creating a user" });
     }
   }),
@@ -86,6 +86,7 @@ exports.getValidate = asyncHandler(async (req, res, next) => {
   const user = {
     username: req.user.username,
     id: req.user.id,
+    status: req.user.status,
   };
 
   // console.log(user);
@@ -369,7 +370,6 @@ exports.putUserStatus = [
   query("status").trim().escape().isLength({ min: 1 }),
 
   asyncHandler(async (req, res, next) => {
-    console.log("UPDATE USER STATUS ENGAGED /////////////////");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
@@ -379,5 +379,26 @@ exports.putUserStatus = [
     const status = await updateUserStatus(+req.user.id, req.query.status);
     console.log(status);
     return res.json(status);
+  }),
+];
+
+// update username
+exports.putUserName = [
+  query("name").trim().escape().isLength({ min: 1, max: 15 }),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    // call service to update user status
+    const response = await updateUserName(+req.user.id, req.query.name);
+    if (response.success) {
+      return res.status(200).json({ response });
+      // return res.status(200).json({ user: response });
+    } else {
+      return res.status(400).json({ message: "Error updating a user" });
+    }
   }),
 ];
