@@ -8,7 +8,7 @@ async function checkConvoExists(users) {
     const response = await prisma.conversation.findMany({
       where: {
         participants: {
-          hasEvery: users,
+          equals: users,
         },
       },
     });

@@ -235,6 +235,7 @@ exports.postNewConvo = [
     // if it has been created, retrun that id for user redirect
     const isDuplicate = await checkConvoExists(req.body.users);
     if (isDuplicate.found === true) {
+      console.log("duplicate found!");
       return res.json({ convo: isDuplicate.response });
     }
 
