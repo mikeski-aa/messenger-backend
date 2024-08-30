@@ -6,12 +6,15 @@ async function updateUserStatus(id, status) {
         id: +id,
       },
       data: {
-        staatus: status,
+        status: status,
       },
     });
 
+    console.log(response);
+
     return response;
   } catch (error) {
+    console.log(error);
     return { error: error };
   }
 }

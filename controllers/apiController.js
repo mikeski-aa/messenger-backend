@@ -369,13 +369,15 @@ exports.putUserStatus = [
   query("status").trim().escape().isLength({ min: 1 }),
 
   asyncHandler(async (req, res, next) => {
+    console.log("UPDATE USER STATUS ENGAGED /////////////////");
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ error: errors.array() });
     }
-
+    console.log(req.user.id);
     // call service to update user status
-    const status = await updateUserStatus(req.user.id, status);
+    const status = await updateUserStatus(+req.user.id, req.query.status);
+    console.log(status);
     return res.json(status);
   }),
 ];
