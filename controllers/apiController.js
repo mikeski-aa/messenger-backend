@@ -26,6 +26,7 @@ const { deleteConvo } = require("../services/deleteConvo");
 const jwt = require("jsonwebtoken");
 const { createNewGroupConvo } = require("../services/createNewGroupConvo");
 const { getGroups, getGroupNames } = require("../services/getGroups");
+const { updateUserStatus } = require("../services/updateUserStatus");
 const { json, response } = require("express");
 
 // POST new user register
@@ -360,5 +361,21 @@ exports.getAllUserGroups = [
     const groupsWithNames = await getGroupNames(groups);
 
     return res.json(groupsWithNames);
+  }),
+];
+
+// updaet user status depending on input
+exports.putUserStatus = [
+  query("status").trim().escape().isLength({ min: 1 }),
+
+  asyncHandler(async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ error: errors.array() });
+    }
+
+    // call service to update user status
+    const status = await updateUserStatus(req.user.id, status);
+    return res.json(status);
   }),
 ];

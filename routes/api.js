@@ -138,4 +138,11 @@ router.get(
   apiController.getAllUserGroups
 );
 
+// route for updating user status
+router.put(
+  "/userstatus",
+  passport.authenticate("jwt", { session: false }),
+  apiController.putUserStatus
+);
+
 module.exports = router;
