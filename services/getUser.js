@@ -15,6 +15,7 @@ async function getUser(username, id) {
         id: true,
         username: true,
         status: true,
+        imageURL: true,
       },
     });
 

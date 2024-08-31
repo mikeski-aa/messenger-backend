@@ -12,6 +12,7 @@ async function getReqOwnerInfo(id) {
         username: true,
         status: true,
         id: true,
+        imageURL: true,
       },
     });
 

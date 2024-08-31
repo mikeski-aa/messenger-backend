@@ -14,6 +14,7 @@ async function getUserInfo(id) {
             id: true,
             username: true,
             status: true,
+            imageURL: true,
           },
         },
         targetRequests: {

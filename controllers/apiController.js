@@ -89,6 +89,7 @@ exports.getValidate = asyncHandler(async (req, res, next) => {
     username: req.user.username,
     id: req.user.id,
     status: req.user.status,
+    imageURL: req.user.imageURL,
   };
 
   // console.log(user);
