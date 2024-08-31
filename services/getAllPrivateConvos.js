@@ -8,27 +8,22 @@ function twoParticipants(array) {
   return temp;
 }
 
-// twoParticipants([
-//   { id: 4, participants: [1, 2] },
-//   { id: 7, participants: [1, 3] },
-//   { id: 56, participants: [1, 3, 5, 6] },
-//   { id: 12, participants: [1, 3, 2] },
-// ]);
-
 async function goThroughArray(array) {
   const tempArray = [];
   for (let x = 0; x < array.length; x++) {
     const user = await getUsernameStatus(array[x].userId);
+
     const newObj = {
       username: user[0].username,
       status: user[0].status,
       user: array[x].userId,
       convo: array[x].convoId,
+      imageURL: user[0].imageURL,
     };
 
     tempArray.push(newObj);
   }
-  console.log(tempArray);
+
   return tempArray;
 }
 
@@ -49,6 +44,8 @@ function getUniqueParticipants(userId, response) {
     };
     tempArray.push(tempObj);
   }
+  console.log("temp  WE NEED");
+  console.log(tempArray);
 
   return tempArray;
 }
@@ -64,10 +61,10 @@ async function getUsernameStatus(userId) {
       select: {
         username: true,
         status: true,
+        imageURL: true,
       },
     });
 
-    console.log(response);
     return response;
   } catch (error) {
     return { error: error };
@@ -85,7 +82,6 @@ async function getAllPrivateConvos(userId) {
         },
       },
     });
-    console.log(response);
 
     const filteredResponse = twoParticipants(response);
     return filteredResponse;
@@ -93,19 +89,6 @@ async function getAllPrivateConvos(userId) {
     return { error: error };
   }
 }
-
-// getAllPrivateConvos(1);
-// getUsernameStatus(1);
-
-// getUniqueParticipants(1, [
-//   { id: 23, participants: [2, 1] },
-//   { id: 25, participants: [5, 1] },
-// ]);
-
-// goThroughArray([
-//   { userId: 2, convoId: 23 },
-//   { userId: 5, convoId: 25 },
-// ]);
 
 module.exports = {
   getAllPrivateConvos,
