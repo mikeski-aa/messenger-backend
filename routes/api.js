@@ -154,8 +154,9 @@ router.put(
   apiController.putUserName
 );
 
-router.put(
-  "/profileImg",
+// upload new profile image to cloudinary and update user table
+router.post(
+  "/profileimg",
   passport.authenticate("jwt", { session: false }),
   upload.single("profpic"),
   apiController.postImage

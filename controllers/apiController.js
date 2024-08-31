@@ -28,7 +28,9 @@ const { createNewGroupConvo } = require("../services/createNewGroupConvo");
 const { getGroups, getGroupNames } = require("../services/getGroups");
 const { updateUserStatus } = require("../services/updateUserStatus");
 const { updateUserName } = require("../services/updateUserName");
+const { postImage } = require("../services/postImage");
 const { json, response } = require("express");
+const { updateUserUrl } = require("../services/updateUserUrl");
 
 // POST new user register
 // user registers with email, password, confirmed password and their desired username
@@ -408,7 +410,14 @@ exports.putUserName = [
 
 // upload user picture
 exports.postImage = asyncHandler(async (req, res, next) => {
-  console.log(req.file.path);
+  const uploadResponse = await postImage(req.file.path);
 
-  return;
+  if (uploadResponse.success === false) {
+    return res.status(400).json({ error: "Error uploading your file" });
+  }
+
+  const updateUrl = await updateUserUrl(req.user.id, uploadResponse.result.url);
+
+  console.log(updateUrl);
+  return res.json(updateUrl);
 });
