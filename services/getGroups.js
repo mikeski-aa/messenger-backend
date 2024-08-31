@@ -69,11 +69,11 @@ async function getGroups(userid) {
   }
 }
 
-getGroupNames([
-  { id: 4, groupname: null, participants: [1, 2] },
-  { id: 7, groupname: null, participants: [1, 3] },
-  { id: 53, groupname: "XD", participants: [1, 2, 3] },
-]);
+// getGroupNames([
+//   { id: 4, groupname: null, participants: [1, 2] },
+//   { id: 7, groupname: null, participants: [1, 3] },
+//   { id: 53, groupname: "XD", participants: [1, 2, 3] },
+// ]);
 // getGroups(1);
 
 module.exports = { getGroups, getGroupNames };
