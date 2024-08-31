@@ -4,6 +4,8 @@ const apiController = require("../controllers/apiController");
 const passport = require("passport");
 const validation = require("../middleware/loginRegisterMW");
 const permission = require("../middleware/convoPermissionMW");
+const multer = require("multer");
+const upload = multer({ dest: "uploads/" });
 
 // testing route
 router.get("/", (req, res, next) => {
@@ -150,6 +152,13 @@ router.put(
   "/username",
   passport.authenticate("jwt", { session: false }),
   apiController.putUserName
+);
+
+router.put(
+  "/profileImg",
+  passport.authenticate("jwt", { session: false }),
+  upload.single("profpic"),
+  apiController.postImage
 );
 
 module.exports = router;

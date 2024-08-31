@@ -405,3 +405,10 @@ exports.putUserName = [
     }
   }),
 ];
+
+// upload user picture
+exports.postImage = asyncHandler(async (req, res, next) => {
+  console.log(req.file.path);
+
+  return;
+});
