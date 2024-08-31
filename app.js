@@ -14,7 +14,7 @@ var app = express();
 
 // configure cors options
 const corsOptions = {
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://dmmeapp.netlify.app"],
   optionSuccessStatus: 200,
 };
 
