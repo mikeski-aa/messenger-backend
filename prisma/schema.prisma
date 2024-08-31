@@ -24,6 +24,7 @@ model user {
   requests reqstatus[] @relation("ownerRequests")
   targetRequests reqstatus[] @relation("targetRequests")
   status String @default("online")
+  imageURL String @default("default")
 }
 
 model reqstatus {
