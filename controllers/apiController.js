@@ -345,8 +345,9 @@ exports.postGroupChat = [
     }
 
     const response = await createNewGroupConvo(req.body.users, req.body.name);
+    const groupsWithNames = await getGroupNames(response);
 
-    return res.json(response);
+    return res.json(groupsWithNames);
   }),
 ];
 
