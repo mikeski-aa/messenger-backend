@@ -264,7 +264,7 @@ exports.getConvo = asyncHandler(async (req, res, next) => {
 exports.postMessage = [
   body("convoid").isLength({ min: 1 }).trim().escape().toInt(),
   body("authorid").isLength({ min: 1 }).trim().escape().toInt(),
-  body("message").isLength({ min: 1, max: 255 }).trim().escape(),
+  body("message").isLength({ min: 1, max: 255 }).trim(),
   body("authorname").isLength({ min: 1, max: 15 }).trim().escape(),
 
   asyncHandler(async (req, res, next) => {
